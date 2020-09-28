@@ -1,15 +1,19 @@
 // console.log("hello world");
 
 var homepageContainer = document.getElementById("quiz-main");
+var questionHeader = document.getElementById("header");
 var startButton = document.getElementById("start-quiz");
 var options = document.getElementById("options");
+var answerContainer = document.getElementById("answers");
+var answerChoice = document.createElement("button");
 
+var correctAnswer = 0;
 var currentQuestion = 0;
-var questions = [
+var allQuestions = [
   {
     question: "Commonly used data types DO NOT include: ",
     options: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-    answer: 3,
+    correctAnswer: 3,
   },
   {
     question: "The condition in an if/else statement is enclosed within ____.",
@@ -19,7 +23,7 @@ var questions = [
       "3. Parenthesis",
       "4. Square Brackets",
     ],
-    answer: 3,
+    correctAnswer: 3,
   },
   {
     question: "Arrays in JavaScript can be used to store ____.",
@@ -29,13 +33,13 @@ var questions = [
       "3. Booleans",
       "4. All of the Above",
     ],
-    answer: 4,
+    correctAnswer: 4,
   },
   {
     question:
       "String values must be enclosed within ____ when being assigned to variables.",
     options: ["1. Commas", "2. Curly Brackets", "3. Quotes", "4. Parenthesis"],
-    answer: 3,
+    correctAnswer: 3,
   },
   {
     question:
@@ -46,7 +50,7 @@ var questions = [
       "3. For loops",
       "4. Console Log",
     ],
-    answer: 4,
+    correctAnswer: 4,
   },
 ];
 
@@ -60,9 +64,22 @@ function renderOptions(array) {
   }
 }
 
+function renderQuestion(index) {
+    questionHeader.textContent = allQuestions[index].question;
+
+    for (var i=0; i < allQuestions[index].options.length); i++){
+        var answerChoices = document.createElement("button");
+
+        answerChoices.setAttribute("class", "btn btn-primary btn-block");
+        answerChoices.setAttribute("index" , i);
+        answerChoices.textContent = questionHeader[index].choices[i];
+
+        
+    }
+}
 
 
-// Initial 'Start Quiz' button to initiate quiz.
+// 'Start Quiz' button to initiate quiz.
 startButton.addEventListener("click", function () {
   homepageContainer.style.display = "none";
   var optionsToDisplay = questions[currentQuestion].options;
