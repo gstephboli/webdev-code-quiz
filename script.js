@@ -1,19 +1,19 @@
 // console.log("hello world");
 
 var homepageContainer = document.getElementById("quiz-main");
-var questionHeader = document.getElementById("header");
-var startButton = document.getElementById("start-quiz");
-var options = document.getElementById("options");
-var answerContainer = document.getElementById("answers");
-var answerChoice = document.createElement("button");
+var quiz = document.getElementById("start-quiz");
+var startButton = document.getElementById("quiz-button");
+var answerKey = document.getElementById("answers");
 
-var correctAnswer = 0;
+
+var score = 0;
+
 var currentQuestion = 0;
 var allQuestions = [
   {
     question: "Commonly used data types DO NOT include: ",
     options: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-    correctAnswer: 3,
+    correctAnswer: "3. Alerts",
   },
   {
     question: "The condition in an if/else statement is enclosed within ____.",
@@ -23,7 +23,7 @@ var allQuestions = [
       "3. Parenthesis",
       "4. Square Brackets",
     ],
-    correctAnswer: 3,
+    correctAnswer: "3. Parenthesis",
   },
   {
     question: "Arrays in JavaScript can be used to store ____.",
@@ -33,13 +33,13 @@ var allQuestions = [
       "3. Booleans",
       "4. All of the Above",
     ],
-    correctAnswer: 4,
+    correctAnswer: "4. All of the Above",
   },
   {
     question:
       "String values must be enclosed within ____ when being assigned to variables.",
     options: ["1. Commas", "2. Curly Brackets", "3. Quotes", "4. Parenthesis"],
-    correctAnswer: 3,
+    correctAnswer: "3. Quotes",
   },
   {
     question:
@@ -50,9 +50,10 @@ var allQuestions = [
       "3. For loops",
       "4. Console Log",
     ],
-    correctAnswer: 4,
+    correctAnswer: "4. Console Log",
   },
 ];
+console.log(allQuestions);
 
 function renderOptions(array) {
   for (var i = 0; i < array.length; i++) {
@@ -64,24 +65,34 @@ function renderOptions(array) {
   }
 }
 
-function renderQuestion(index) {
-    questionHeader.textContent = allQuestions[index].question;
+function populateQuestion(qNum) {
+  var individualQuestion = allQuestions[i];
+  quiz.innerHTML = individualQuestion.question;
 
-    for (var i=0; i < allQuestions[index].options.length); i++){
-        var answerChoices = document.createElement("button");
-
-        answerChoices.setAttribute("class", "btn btn-primary btn-block");
-        answerChoices.setAttribute("index" , i);
-        answerChoices.textContent = questionHeader[index].choices[i];
-
-        
-    }
+  selection.innerHTML = "";
+  for (key in individualQuestion.choice) {
+    var btnName = "question" + i + " choice";
+    var choiceText = individualQuestion.choices[key];
+    selection.appendChild(createLi( btnName, choiceText));
+  }
 }
 
+// function renderQuestion(index) {
+//     questionHeader.textContent = allQuestions[index].question;
+
+//     for (var i=0; i < allQuestions[index].options.length); i++){
+//         var answerChoices = document.createElement("button");
+
+//         answerChoices.setAttribute("class", "btn btn-primary btn-block");
+//         answerChoices.setAttribute("index" , i);
+//         answerChoices.textContent = questionHeader[index].choices[i];
+
+//     }
+// }
 
 // 'Start Quiz' button to initiate quiz.
 startButton.addEventListener("click", function () {
   homepageContainer.style.display = "none";
-  var optionsToDisplay = questions[currentQuestion].options;
+  var optionsToDisplay = allQuestions[currentQuestion].options;
   renderOptions(optionsToDisplay);
 });
