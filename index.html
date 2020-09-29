@@ -8,49 +8,52 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
+    <title>Web APIs - Code Quiz</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Added bootstrap library for easy styling -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Navigation bar where you can see high scores and the time for the quiz -->
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="./highscores.html">View Highscores</a>
+        <a class="navbar-brand" href="highscores.html">View Highscores</a>
         <span class="ml-auto" id="timer">Time: 0</span>
       </nav>
     </header>
-    <!-- Home Screen where the directions for the quiz and start button will be -->
     <main>
-      <div class="container" id="quiz-main">
+      <!-- Main screen with the instructions of the quiz and the start button -->
+      <div class="container my-5 text-center" id="main-quiz-start">
         <div class="row">
-          <div class="col-sm-12 text-center">
+          <div class="col-8">
             <h1>Coding Quiz Challenge</h1>
             <p>
-              Try to answer the follow code-related questions with the time
+              Try to answer the following code-related questions within the time
               limit. Keep in mind that incorrect answers will penalize your
-              score/time by 10 seconds!
+              score/time by ten seconds!
             </p>
           </div>
         </div>
-
         <div class="row">
-          <div class="col-sm-12 text-center">
-            <button type="button" class="btn btn-primary" id="quiz-button">
+          <div class="col-8">
+            <button
+              type="button"
+              class="btn btn-primary rounded"
+              id="start-quiz"
+            >
               Start Quiz
             </button>
           </div>
         </div>
       </div>
-
-      <div class="container" id="quiz-container">
+      <!-- container where the quiz questions and answer options will be shown after the start of the quiz -->
+      <div class="container my-5" id="quiz-container">
         <div class="row">
           <div class="col-8">
             <h1 id="heading"></h1>
@@ -61,28 +64,30 @@
         </div>
       </div>
 
-      <div class="container" id="score-page">
+      <!-- container where the user's score appears and they are able to enter their initials into the highscore page -->
+      <div class="container my-5 text-left" id="score-page">
         <div class="row">
-          <div class="col-sm-8">
-            <h1 id="complete-message"></h1>
+          <div class="col-8">
+            <h1 id="completion-message"></h1>
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-8">
-            <p class="mt-2" id="score"></p>
+          <div class="col-8">
+            <p id="score" class="mt-2"></p>
           </div>
         </div>
         <div class="row">
-          <form class="col-sm-8 form-inline" id="input-form">
-            <label class="mx-1" id="initials-input"></label>
+          <form class="col-8 form-inline" id="input-form">
+            <label id="initials-input" class="mx-1"> </label>
           </form>
         </div>
         <div class="row">
           <div class="col-8" id="answer-feedback"></div>
         </div>
       </div>
+     
     </main>
 
-    <script src="./script.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
