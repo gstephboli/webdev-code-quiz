@@ -1,0 +1,17 @@
+.navbar-light .navbar-brand {
+    color: purple;
+  }
+
+  #timer {
+    font-weight: bold;
+    font-size: medium;
+  }
+
+  .btn-primary {
+    background-color: purple;
+    border: solid black 1px;
+  }
+
+  #answers .btn {
+    display: block;
+  }
