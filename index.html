@@ -24,49 +24,65 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="./highscores.html">View Highscores</a>
-        <span class="ml-auto" id="timer"></span>
+        <span class="ml-auto" id="timer">Time: 0</span>
       </nav>
     </header>
     <!-- Home Screen where the directions for the quiz and start button will be -->
-    <main class="container">
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <h1 id="quiz-main">Coding Quiz Challenge</h1>
-          <h4>
-            Try to answer the follow code-related questions with the time limit.
-            Keep in mind that incorrect answers will penalize your score/time by
-            10 seconds!
-          </h4>
+    <main>
+      <div class="container" id="quiz-main">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <h1>Coding Quiz Challenge</h1>
+            <p>
+              Try to answer the follow code-related questions with the time
+              limit. Keep in mind that incorrect answers will penalize your
+              score/time by 10 seconds!
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <button type="button" class="btn btn-primary" id="quiz-button">
+              Start Quiz
+            </button>
+          </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12 text-center">
-          <button type="button" class="btn btn-primary" id="quiz-button">
-            Start Quiz
-          </button>
+      <div class="container" id="quiz-container">
+        <div class="row">
+          <div class="col-8">
+            <h1 id="heading"></h1>
+          </div>
+        </div>
+        <div class="row">
+          <div id="answers"></div>
         </div>
       </div>
-    
 
-    <div class="container" id="score-page">
-      <div class="row">
-        <div class="col-sm-8">
-          <h1 id="complete-message"></h1>
+      <div class="container" id="score-page">
+        <div class="row">
+          <div class="col-sm-8">
+            <h1 id="complete-message"></h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <p class="mt-2" id="score"></p>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col-sm-8 form-inline" id="input-form">
+            <label class="mx-1" id="initials-input"></label>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-8" id="answer-feedback"></div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-8">
-          <p id="score"></p>
-        </div>
-      </div>
-      <div class="row">
-        <form class="col-sm-8" id="input-form">
-          <label id="initials-input"></label>
-        </form>
-      </div>
-    </div>
-</main>
+    </main>
+
     <script src="./script.js"></script>
   </body>
 </html>
