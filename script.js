@@ -7,7 +7,9 @@ var startButton = document.getElementById("start-quiz");
 var headingQuestion = document.getElementById("heading");
 var answerChoices = document.getElementById("answers");
 var feedbackContainer = document.getElementById("answer-feedback");
+var scorePage = document.getElementById("score-page");
 var submitScoreButton = document.getElementById("submit-scores");
+var inputScore = document.getElementById("input-form");
 
 var timeLeft = 75;
 var interval;
@@ -66,6 +68,7 @@ var questionBank = [
 ];
 
 var scoreArray = [];
+
 function startQuiz() {
   // sets the display of the instruction page to none, hiding it from the user
   mainPage.style.display = "none";
@@ -73,7 +76,7 @@ function startQuiz() {
   renderQuestions(questionIndex);
 }
 function startTimer() {
-  // displays the timer
+  // Displays the timer
   timerDisplay.textContent = "Time: " + timeLeft;
   interval = setInterval(function () {
     timeLeft--;
@@ -132,44 +135,32 @@ function checkAnswer(event) {
   }
 }
 
-// Displays the score screen content after the game ends (either the user's time is up or they answer all questions).
+// displays the score screen content after the game ends (either the user's time is up or they answer all questions).
 function renderScoreScreen() {
-
-  // Clears the quiz questions and answers content from the page
+  // clears the quiz questions and answers content from the page
   var quizContainer = document.getElementById("quiz-container");
   quizContainer.innerHTML = "";
-  var completionMessage = document.getElementById("completion-message");
-  completionMessage.textContent = "All done!";
+  // shows the score-page content
+  scorePage.style.visibility = "visible";
+  inputScore.style.visibility = "visible";
+  // gets the id of the paragraph element and outputs the user's score
   var scoreMessage = document.getElementById("score");
   scoreMessage.textContent = "Your final score is: " + finalScore;
-
-  var userInitials = document.getElementById("initials-input");
-  userInitials.textContent = "Enter Initials: ";
-
-  var inputForm = document.getElementById("input-form");
-  var inputBox = document.createElement("input");
-  inputBox.setAttribute("class", "form-control-sm mx-2 w-25");
-  var subBtn = document.createElement("button");
-  subBtn.textContent = "Submit";
-  subBtn.setAttribute("class", "btn btn-primary rounded");
-
-  inputForm.append(userInitials);
-  inputForm.append(inputBox);
-  inputForm.append(subBtn);
-
-  console.log("Game over!");
+  // console.log("Game over!");
 }
-
-// Function to display either correct or wrong feedback to the user based on their answer choice
+// function to display either correct or wrong feedback to the user based on their answer choice
 function displayFeedback(container) {
   // creates the div for the feedback
   var feedBack = document.createElement("div");
-
+  // sets the attribute styles and id
   feedBack.setAttribute("class", "feedback mt-3 pt-3");
   feedBack.setAttribute("id", "answer-feedback");
+  // sets the text to either correct or wrong based on the user choice
   feedBack.textContent = answerFeedback;
+  // add the div to the proper container passed in by the function
   container.appendChild(feedBack);
 }
+
 
 // Function to check whether the answer was correct or wrong
 function answerStatus() {
@@ -223,7 +214,7 @@ startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
 answerChoices.addEventListener("click", answerStatus);
-submitScoreButton.addEventListener("click", function(event){
+submitScoreButton.addEventListener("click", function (event) {
   event.preventDefault();
   saveScores();
   window.location.href = "highscores.html";
