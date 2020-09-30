@@ -68,7 +68,7 @@
       <div class="container my-5 text-left" id="score-page">
         <div class="row">
           <div class="col-8">
-            <h1 id="completion-message"></h1>
+            <h1 id="completion-message">You're Done!</h1>
           </div>
         </div>
         <div class="row">
@@ -76,18 +76,19 @@
             <p id="score" class="mt-2"></p>
           </div>
         </div>
-        <div class="row">
+        <div class="row" id="highscore-input">
           <form class="col-8 form-inline" id="input-form">
             <label id="initials-input" class="mx-1"> Enter Initials: </label>
-            <input class="form-control-sm mx-2 w-25" id="initials"/>
-            <button class="btn btn-primary" id="submit-scores">Submit</button>
+            <input class="form-control-sm mx-2 w-25" id="initials" />
+            <button class="btn btn-primary rounded" id="submit-scores">
+              Submit
+            </button>
           </form>
         </div>
         <div class="row">
           <div class="col-8" id="answer-feedback"></div>
         </div>
       </div>
-     
     </main>
 
     <script src="script.js"></script>
