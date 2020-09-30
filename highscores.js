@@ -6,6 +6,7 @@ var storedScoreArray = JSON.parse(localStorage.getItem("userScores"));
 // Targets the ul to populate the scores list under
 var highScores = document.getElementById("scores");
 var clearHighScores = document.getElementById("clear-history");
+var returnMain = document.getElementById("restart-quiz");
 // when the page loads, the renderScore function  is executed
 window.onload = function renderScores() {
   for (var i = 0; i < storedScoreArray.length; i++) {
@@ -23,25 +24,14 @@ window.onload = function renderScores() {
   }
 };
 
-clearHighScores.addEventListener("click", function(event){
+clearHighScores.addEventListener("click", function (event) {
   event.preventDefault();
   window.localStorage.clear();
-  while (highScores.firstChild){
+  while (highScores.firstChild) {
     highScores.removeChild(highScores.firstChild);
   }
 });
 
-// // When a element inside of the todoList is clicked...
-// highScores.addEventListener("click", function(event) {
-//   var element = event.target;
-
-//   // If that element is a button...
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-
-//     // Re-render the list
-//     renderTodos();
-//   }
-// });
+returnMain.addEventListener("click", function(){
+  window.location.href = "index.html";
+})
