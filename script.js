@@ -7,6 +7,7 @@ var startButton = document.getElementById("start-quiz");
 var headingQuestion = document.getElementById("heading");
 var answerChoices = document.getElementById("answers");
 var feedbackContainer = document.getElementById("answer-feedback");
+var submitScoreButton = document.getElementById("submit-scores");
 
 var timeLeft = 75;
 var interval;
@@ -64,6 +65,7 @@ var questionBank = [
   },
 ];
 
+var scoreArray = [];
 function startQuiz() {
   // sets the display of the instruction page to none, hiding it from the user
   mainPage.style.display = "none";
@@ -204,9 +206,25 @@ function feedbackTimer() {
     }
   }, 800);
 }
+
+// saves the user scores to an object in localStorage
+function saveScores() {
+  var initials = document.getElementById("initials").value;
+  var storedScoreArray = JSON.parse(localStorage.getItem("userScores"));
+  if (storedScoreArray !== null) {
+    scoreArray = storedScoreArray;
+  }
+  scoreArray.push({ name: initials, score: finalScore });
+  localStorage.setItem("userScores", JSON.stringify(scoreArray));
+  console.log(scoreArray);
+}
 // when the start button is clicked, the quiz begins
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
 answerChoices.addEventListener("click", answerStatus);
-
+submitScoreButton.addEventListener("click", function(event){
+  event.preventDefault();
+  saveScores();
+  window.location.href = "highscores.html";
+});
