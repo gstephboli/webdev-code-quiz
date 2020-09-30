@@ -8,6 +8,10 @@
     font-size: medium;
   }
 
+  #score-page  {
+      visibility: hidden;
+  }
+
   .btn-primary {
     background-color: purple;
     border: solid black 1px;
