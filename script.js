@@ -1,98 +1,212 @@
 // console.log("hello world");
 
-var homepageContainer = document.getElementById("quiz-main");
-var quiz = document.getElementById("start-quiz");
-var startButton = document.getElementById("quiz-button");
-var answerKey = document.getElementById("answers");
+// DOM variables defined
+var timerDisplay = document.getElementById("timer");
+var mainPage = document.getElementById("main-quiz-start");
+var startButton = document.getElementById("start-quiz");
+var headingQuestion = document.getElementById("heading");
+var answerChoices = document.getElementById("answers");
+var feedbackContainer = document.getElementById("answer-feedback");
 
+var timeLeft = 75;
+var interval;
+var questionIndex = 0;
 
-var score = 0;
+// Variable that will have user feedback on whether the answer was correct or wrong
+var answerFeedback;
 
-var currentQuestion = 0;
-var allQuestions = [
+// Variable to hold the user's score during the quiz
+var finalScore;
+
+// Array of objects with all of the questions, answer choices, and the correct answer for each question
+var questionBank = [
   {
-    question: "Commonly used data types DO NOT include: ",
-    options: ["1. Strings", "2. Booleans", "3. Alerts", "4. Numbers"],
-    correctAnswer: "3. Alerts",
+    question: "Commonly used data types DO NOT include:",
+    choices: ["1. strings", "2. booleans", "3. alerts", "4. numbers"],
+    answer: "3. alerts",
   },
   {
-    question: "The condition in an if/else statement is enclosed within ____.",
-    options: [
-      "1. Quotes",
-      "2. Curly Brackets",
-      "3. Parenthesis",
-      "4. Square Brackets",
+    question: "The condition in an if/else statement is enclosed within _____.",
+    choices: [
+      "1. quotes",
+      "2. curly brackets",
+      "3. parenthesis",
+      "4. square brackets",
     ],
-    correctAnswer: "3. Parenthesis",
+    answer: "3. parenthesis",
   },
   {
-    question: "Arrays in JavaScript can be used to store ____.",
-    options: [
-      "1. Numbers and Strings",
-      "2. Other arrays",
-      "3. Booleans",
-      "4. All of the Above",
+    question: "Arrays in JavaScript can be used to store _____.",
+    choices: [
+      "1. numbers and strings",
+      "2. other arrays",
+      "3. booleans",
+      "4. all of the above",
     ],
-    correctAnswer: "4. All of the Above",
+    answer: "4. all of the above",
   },
   {
     question:
-      "String values must be enclosed within ____ when being assigned to variables.",
-    options: ["1. Commas", "2. Curly Brackets", "3. Quotes", "4. Parenthesis"],
-    correctAnswer: "3. Quotes",
+      "String values must be enclosed within _____ when being assigned to variables.",
+    choices: ["1. commas", "2. curly brackets", "3. quotes", "4. parenthesis"],
+    answer: "3. quotes",
   },
   {
     question:
-      "A very useful tool used during development and debugging for printing content to the debugger is:",
-    options: [
+      "A very useful  tool used during development and debugging for printing content to the debugger is:",
+    choices: [
       "1. JavaScript",
-      "2. Terminal/bash",
-      "3. For loops",
-      "4. Console Log",
+      "2. terminal/bash",
+      "3. for loops",
+      "4. console.log",
     ],
-    correctAnswer: "4. Console Log",
+    answer: "4. console.log",
   },
 ];
-console.log(allQuestions);
 
-function renderOptions(array) {
-  for (var i = 0; i < array.length; i++) {
-    var button = document.createElement("button");
-    button.setAttribute("class", "btn btn-info");
-    button.textContent = array[i];
-    button.setAttribute("data-value", array[i]);
-    options.append(button);
+function startQuiz() {
+  // sets the display of the instruction page to none, hiding it from the user
+  mainPage.style.display = "none";
+  // renders the question
+  renderQuestions(questionIndex);
+}
+function startTimer() {
+  // displays the timer
+  timerDisplay.textContent = "Time: " + timeLeft;
+  interval = setInterval(function () {
+    timeLeft--;
+    timerDisplay.textContent = "Time: " + timeLeft;
+    // Sets the user's score to the remaining time
+    finalScore = timeLeft;
+    if (timeLeft === 0) {
+      clearInterval(interval);
+    }
+  }, 1000);
+}
+// Displays the questions and answers for the quiz
+function renderQuestions(index) {
+  //console.log(timerDisplay.textContent);
+  //console.log(finalScore);
+  if (index === questionBank.length) {
+    // stops the timer and executes the score screen function
+    clearInterval(interval);
+    renderScoreScreen();
+  } else {
+    answerChoices.innerHTML = "";
+    headingQuestion.textContent = questionBank[index].question;
+    //console.log(headingQuestion.textContent);
+    // loops through all of the answer options in the choices array
+    for (var i = 0; i < questionBank[index].choices.length; i++) {
+      // Creates the answer button element
+      var answerButtons = document.createElement("button");
+      // Sets the text of the button to the first answer choice in the array
+      answerButtons.textContent = questionBank[index].choices[i];
+      answerButtons.setAttribute("class", "btn btn-primary rounded");
+      answerButtons.setAttribute("data-index", i);
+      answerChoices.appendChild(answerButtons);
+    }
+  }
+}
+function checkAnswer(event) {
+  // Checks to see if the answer button clicked is equal to the correct answer for the question
+  var answerIndex = event.target.getAttribute("data-index");
+  event.preventDefault();
+
+  if (
+    event.target.matches("button") &&
+    questionBank[questionIndex].choices[answerIndex] ===
+      questionBank[questionIndex].answer
+  ) {
+    // If the answer is correct, the question index is incremented and the next question is displayed
+    answerFeedback = "Correct!";
+    questionIndex++;
+    renderQuestions(questionIndex);
+  } else {
+    // If the answer is incorrect, 10 seconds are subtracted from the time, the question index is incremented and the next question is displayed
+    answerFeedback = "Wrong!";
+    timeLeft -= 10;
+    questionIndex++;
+    renderQuestions(questionIndex);
   }
 }
 
-function populateQuestion(qNum) {
-  var individualQuestion = allQuestions[i];
-  quiz.innerHTML = individualQuestion.question;
+// Displays the score screen content after the game ends (either the user's time is up or they answer all questions).
+function renderScoreScreen() {
 
-  selection.innerHTML = "";
-  for (key in individualQuestion.choice) {
-    var btnName = "question" + i + " choice";
-    var choiceText = individualQuestion.choices[key];
-    selection.appendChild(createLi( btnName, choiceText));
+  // Clears the quiz questions and answers content from the page
+  var quizContainer = document.getElementById("quiz-container");
+  quizContainer.innerHTML = "";
+  var completionMessage = document.getElementById("completion-message");
+  completionMessage.textContent = "All done!";
+  var scoreMessage = document.getElementById("score");
+  scoreMessage.textContent = "Your final score is: " + finalScore;
+
+  var userInitials = document.getElementById("initials-input");
+  userInitials.textContent = "Enter Initials: ";
+
+  var inputForm = document.getElementById("input-form");
+  var inputBox = document.createElement("input");
+  inputBox.setAttribute("class", "form-control-sm mx-2 w-25");
+  var subBtn = document.createElement("button");
+  subBtn.textContent = "Submit";
+  subBtn.setAttribute("class", "btn btn-primary rounded");
+
+  inputForm.append(userInitials);
+  inputForm.append(inputBox);
+  inputForm.append(subBtn);
+
+  console.log("Game over!");
+}
+
+// Function to display either correct or wrong feedback to the user based on their answer choice
+function displayFeedback(container) {
+  // creates the div for the feedback
+  var feedBack = document.createElement("div");
+
+  feedBack.setAttribute("class", "feedback mt-3 pt-3");
+  feedBack.setAttribute("id", "answer-feedback");
+  feedBack.textContent = answerFeedback;
+  container.appendChild(feedBack);
+}
+
+// Function to check whether the answer was correct or wrong
+function answerStatus() {
+  if (answerFeedback === "Correct!") {
+    if (questionIndex === questionBank.length) {
+      displayFeedback(feedbackContainer);
+    }
+    // displays the "Correct!" feedback message to the answerChoices container if the question is correct
+    displayFeedback(answerChoices);
+    feedbackTimer();
+    console.log("Correct!");
+  } else {
+    if (questionIndex === questionBank.length) {
+      displayFeedback(feedbackContainer);
+    }
+    // displays the "Wrong!" feedback message to the answerChoices container if the question is correct
+    displayFeedback(answerChoices);
+    console.log("Wrong!");
+    console.log("Wrong!");
+    feedbackTimer();
   }
 }
 
-// function renderQuestion(index) {
-//     questionHeader.textContent = allQuestions[index].question;
+// Timer removes the feedback information of correct or wrong after 1 second
+function feedbackTimer() {
+  var time = 1;
+  var interval = setInterval(function () {
+    time--;
+    if (time === 0) {
+      console.log("times up");
+      var feedbackContent = document.getElementById("answer-feedback");
+      feedbackContent.parentNode.removeChild(feedbackContent);
+      clearInterval(interval);
+    }
+  }, 800);
+}
+// when the start button is clicked, the quiz begins
+startButton.addEventListener("click", startQuiz);
+startButton.addEventListener("click", startTimer);
+answerChoices.addEventListener("click", checkAnswer);
+answerChoices.addEventListener("click", answerStatus);
 
-//     for (var i=0; i < allQuestions[index].options.length); i++){
-//         var answerChoices = document.createElement("button");
-
-//         answerChoices.setAttribute("class", "btn btn-primary btn-block");
-//         answerChoices.setAttribute("index" , i);
-//         answerChoices.textContent = questionHeader[index].choices[i];
-
-//     }
-// }
-
-// 'Start Quiz' button to initiate quiz.
-startButton.addEventListener("click", function () {
-  homepageContainer.style.display = "none";
-  var optionsToDisplay = allQuestions[currentQuestion].options;
-  renderOptions(optionsToDisplay);
-});
