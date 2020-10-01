@@ -23,7 +23,7 @@ window.onload = function renderScores() {
     highScores.appendChild(scoreList);
   }
 };
-
+// Clears the highscores and removes from local storage.
 clearHighScores.addEventListener("click", function (event) {
   event.preventDefault();
   window.localStorage.clear();
@@ -31,7 +31,7 @@ clearHighScores.addEventListener("click", function (event) {
     highScores.removeChild(highScores.firstChild);
   }
 });
-
+// Allows the user to return to the quiz homepage
 returnMain.addEventListener("click", function(){
   window.location.href = "index.html";
 })

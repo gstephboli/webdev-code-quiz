@@ -82,7 +82,6 @@ function startTimer() {
   interval = setInterval(function () {
     timeLeft--;
     timerDisplay.textContent = "Time: " + timeLeft;
-    // Sets the user's score to the remaining time
     finalScore = timeLeft;
     if (timeLeft === 0) {
       clearInterval(interval);
@@ -93,16 +92,12 @@ function startTimer() {
 }
 // Displays the questions and answers for the quiz
 function renderQuestions(index) {
-  //console.log(timerDisplay.textContent);
-  //console.log(finalScore);
   if (index === questionBank.length) {
-    // stops the timer and executes the score screen function
     clearInterval(interval);
     renderScoreScreen();
   } else {
     answerChoices.innerHTML = "";
     headingQuestion.textContent = questionBank[index].question;
-    //console.log(headingQuestion.textContent);
     // loops through all of the answer options in the choices array
     for (var i = 0; i < questionBank[index].choices.length; i++) {
       // Creates the answer button element
@@ -119,7 +114,6 @@ function checkAnswer(event) {
   // Checks to see if the answer button clicked is equal to the correct answer for the question
   var answerIndex = event.target.getAttribute("data-index");
   event.preventDefault();
-
   if (
     event.target.matches("button") &&
     questionBank[questionIndex].choices[answerIndex] ===
@@ -140,7 +134,6 @@ function checkAnswer(event) {
 
 // displays the score screen content after the game ends (either the user's time is up or they answer all questions).
 function renderScoreScreen() {
-  // clears the quiz questions and answers content from the page
   var quizContainer = document.getElementById("quiz-container");
   quizContainer.innerHTML = "";
   // shows the score-page content
@@ -149,18 +142,13 @@ function renderScoreScreen() {
   // gets the id of the paragraph element and outputs the user's score
   var scoreMessage = document.getElementById("score");
   scoreMessage.textContent = "Your final score is: " + finalScore;
-  // console.log("Game over!");
 }
 // function to display either correct or wrong feedback to the user based on their answer choice
 function displayFeedback(container) {
-  // creates the div for the feedback
   var feedBack = document.createElement("div");
-  // sets the attribute styles and id
   feedBack.setAttribute("class", "feedback mt-3 pt-3");
   feedBack.setAttribute("id", "answer-feedback");
-  // sets the text to either correct or wrong based on the user choice
   feedBack.textContent = answerFeedback;
-  // add the div to the proper container passed in by the function
   container.appendChild(feedBack);
 }
 
@@ -212,7 +200,7 @@ function saveScores() {
   localStorage.setItem("userScores", JSON.stringify(scoreArray));
   console.log(scoreArray);
 }
-// when the start button is clicked, the quiz begins
+
 startButton.addEventListener("click", startQuiz);
 startButton.addEventListener("click", startTimer);
 answerChoices.addEventListener("click", checkAnswer);
