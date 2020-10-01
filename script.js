@@ -1,4 +1,5 @@
 // console.log("hello world");
+console.log(window);
 
 // DOM variables defined
 var timerDisplay = document.getElementById("timer");
@@ -85,6 +86,8 @@ function startTimer() {
     finalScore = timeLeft;
     if (timeLeft === 0) {
       clearInterval(interval);
+      finalScore = 0;
+      renderScoreScreen();
     }
   }, 1000);
 }
