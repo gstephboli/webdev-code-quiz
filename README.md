@@ -45,7 +45,7 @@ I credit the following websites:
 ## Contact
 
 ####  **Stephany Bolivar** 
-*  **Github:** [@gstephbolivar](https://github.com/gstephboli)
+*  **Github:** [@gstephbolivar](https://github.com/gstephbolivar)
 *  **Email:** [g.stephanybolivar@gmail.com](g.stephanybolivar@gmail.com)
 
 
