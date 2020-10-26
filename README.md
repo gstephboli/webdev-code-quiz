@@ -42,6 +42,11 @@ I credit the following websites:
 
 [StackOverflow] (https://stackoverflow.com/questions/9456289/how-to-make-a-div-visible-and-invisible-with-javascript?fbclid=IwAR0RjdTjoo23K-PUIdloxf3-MbZXgtQklGMaVuorVT2oeVJtlwJUokJgDtI) Helping me hide and show the score page message and input information. 
 
+## Contact
+
+####  **Stephany Bolivar** 
+*  **Github:** [@gstephboli](https://github.com/gstephboli)
+*  **Email:** [g.stephanybolivar@gmail.com](g.stephanybolivar@gmail.com)
 
 
 ## License
