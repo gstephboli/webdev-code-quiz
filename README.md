@@ -5,7 +5,7 @@ This assignment was intended to push my boundaries within Javascript and manipul
     My final problem I ran into was when I thought I had completed the assignment and then realized that when the timer ran out, the quiz just stopped and did not take the user to the score page. Thankfully with some quick searching and trial and error, I was able to get the timer to get to zero, give the user a score of zero and send the user to the score page. 
 ## Installation
 
-Fork repository at [gstephboli github](https://github.com/gstephboli/webdev-code-quiz) .
+Fork repository at [gstephbolivar github](https://gstephbolivar.github.io/webdev-code-quiz/) .
 
 Clone repository to local terminal.
 
