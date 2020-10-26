@@ -14,7 +14,7 @@ Open HTML then open webpage to default browser.
 Happy editing!
 
 ## Usage
-This [website] (https://gstephboli.github.io/webdev-code-quiz/) test a user's basic knowledge of Javascript. The user has 75 seconds to complete the quiz, if time runs out the test ends and their score is zero. For every wrong answer, the user loses 10 seconds on the clock. At the end of the quiz, the user can input their score and save it in the high score page, otherwise they can either clear the high score history or go back to the main quiz page. 
+This [website] (https://gstephbolivar.github.io/webdev-code-quiz/) test a user's basic knowledge of Javascript. The user has 75 seconds to complete the quiz, if time runs out the test ends and their score is zero. For every wrong answer, the user loses 10 seconds on the clock. At the end of the quiz, the user can input their score and save it in the high score page, otherwise they can either clear the high score history or go back to the main quiz page. 
 
 ![HomePage](./images/mainpage.png)
 ![FirstQuestion](./images/firstquestion.png)
